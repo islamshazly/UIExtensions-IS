@@ -1,3 +1,3 @@
 # UIExtensions-IS
 
-UI Extensios for UIKite 
+UI Extensios for UIKit 
