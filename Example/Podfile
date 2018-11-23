@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'UIExtensions-IS_Example' do
+  pod 'UIExtensions+IS', :path => '../'
+
+  target 'UIExtensions-IS_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
