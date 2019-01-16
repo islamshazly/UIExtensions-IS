@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
     
   s.name             = 'UIExtensions+IS'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'UIExtensions to facilitate using UIKit'
   s.description      = 'Extensions for CGfloat, CGsize, CGpoint, Gestures, UIView, UIImaage, UIImageView, UIColor, UINavigation, UITableView, UIScreen, UITextFiled, ...'
   s.homepage         = 'https://github.com/islamshazly/UIExtensions-IS'
@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '10.0'
   s.source_files = 'UIExtensions-IS/Classes/**/*.{swift}'
   s.frameworks = 'UIKit'
-  s.dependency 'Kingfisher'
+  s.dependency 'Kingfisher', '~>4.10.1'
+  s.dependency 'Reusable'
   
 end
