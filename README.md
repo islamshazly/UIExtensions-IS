@@ -26,7 +26,7 @@ pod 'UIExtensions+IS'
 
 ## Author
 
-islamshazly, islam.elshazly92@gmail.com,https://twitter.com/elshazly92
+islamshazly, ishazly92@gmail.com,https://twitter.com/shazly92
 
 ## License
 
