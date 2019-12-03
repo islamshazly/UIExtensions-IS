@@ -9,16 +9,16 @@ import ImageIO
 
 public extension UIImage {
     
-    public var bytesSize: Int {
+    var bytesSize: Int {
         return self.jpegData(compressionQuality: 1)?.count ?? 0
     }
-    public var kilobytesSize: Int {
+    var kilobytesSize: Int {
         return bytesSize / 1024
     }
-    public var original: UIImage {
+    var original: UIImage {
         return withRenderingMode(.alwaysOriginal)
     }
-    public var template: UIImage {
+    var template: UIImage {
         return withRenderingMode(.alwaysTemplate)
     }
 }
@@ -27,16 +27,16 @@ public extension UIImage {
 
 public extension UIImage {
     
-    public func compressed(quality: CGFloat = 0.5) -> UIImage? {
+    func compressed(quality: CGFloat = 0.5) -> UIImage? {
         guard let data = compressedData(quality: quality) else { return nil }
         return UIImage(data: data)
     }
     
-    public func compressedData(quality: CGFloat = 0.5) -> Data? {
+    func compressedData(quality: CGFloat = 0.5) -> Data? {
         return self.jpegData(compressionQuality: quality)
     }
     
-    public func cropped(to rect: CGRect) -> UIImage {
+    func cropped(to rect: CGRect) -> UIImage {
         guard rect.size.height < size.height && rect.size.height < size.height else {
             return self
         }
@@ -45,7 +45,7 @@ public extension UIImage {
         return UIImage(cgImage: image)
     }
     
-    public func scaled(toHeight: CGFloat, opaque: Bool = false) -> UIImage? {
+    func scaled(toHeight: CGFloat, opaque: Bool = false) -> UIImage? {
         let scale = toHeight / size.height
         let newWidth = size.width * scale
         UIGraphicsBeginImageContextWithOptions(CGSize(width: newWidth, height: toHeight), opaque, 0)
@@ -56,7 +56,7 @@ public extension UIImage {
         return newImage
     }
     
-    public func scaled(toWidth: CGFloat, opaque: Bool = false) -> UIImage? {
+    func scaled(toWidth: CGFloat, opaque: Bool = false) -> UIImage? {
         let scale = toWidth / size.width
         let newHeight = size.height * scale
         UIGraphicsBeginImageContextWithOptions(CGSize(width: toWidth, height: newHeight), opaque, 0)
@@ -67,7 +67,7 @@ public extension UIImage {
         return newImage
     }
     
-    public func filled(withColor color: UIColor) -> UIImage {
+    func filled(withColor color: UIColor) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         color.setFill()
         
@@ -88,7 +88,7 @@ public extension UIImage {
         return newImage
     }
     
-    public static func imageWithColor(color: UIColor, size: CGSize) -> UIImage {
+    static func imageWithColor(color: UIColor, size: CGSize) -> UIImage {
         let rect: CGRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         color.setFill()
@@ -99,7 +99,7 @@ public extension UIImage {
         return image
     }
     
-    public func with(color: UIColor) -> UIImage {
+    func with(color: UIColor) -> UIImage {
         guard let cgImage = self.cgImage else {
             return self
         }
@@ -118,17 +118,17 @@ public extension UIImage {
         return newImage
     }
     
-    public func changeImageColorTint(_ color : UIColor) {
+    func changeImageColorTint(_ color : UIColor) {
         self.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
     }
     
-    public func encodeImage () -> String {
+    func encodeImage () -> String {
         let strBase64 = self.pngData()!.base64EncodedString()
         
         return strBase64
     }
     
-    public func decodeImage (_ mediaFile : String) -> UIImage? {
+    func decodeImage (_ mediaFile : String) -> UIImage? {
         if let decodedData = Data(base64Encoded: mediaFile, options: .ignoreUnknownCharacters) {
             let image = UIImage(data: decodedData)
             return image
@@ -137,17 +137,17 @@ public extension UIImage {
         return nil
     }
     
-    public func imageToDate() -> Data?{
+    func imageToDate() -> Data?{
         let data = self.pngData()
         return data ?? nil
     }
     
-    public func dateToImage(_ data : Data) -> UIImage? {
+    func dateToImage(_ data : Data) -> UIImage? {
         let imagePt = UIImage(data: data)
         return imagePt
     }
     
-    public func image(withTintColor color: UIColor) -> UIImage{
+    func image(withTintColor color: UIColor) -> UIImage{
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
         let context: CGContext = UIGraphicsGetCurrentContext()!
         context.translateBy(x: 0, y: self.size.height)

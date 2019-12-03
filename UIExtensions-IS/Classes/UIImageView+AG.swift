@@ -6,17 +6,18 @@
 //
 
 import UIKit
+import Kingfisher
 
 // MARK: - properties
 
 public extension UIImageView {
     
-    public var widthPixel : Int {
+    var widthPixel : Int {
         get {
             return Int(self.image!.scale * self.image!.size.width)
         }
     }
-    public var hieghtPixel : Int {
+    var hieghtPixel : Int {
         get {
             return Int(self.image!.scale * self.image!.size.height)
         }
@@ -37,29 +38,40 @@ public extension UIImageView {
 public extension UIImageView {
     
     
-    public func showLoadingOnImage (){
+    func showLoadingOnImage (){
         self.kf.indicatorType = .activity
     }
     
-    public func changeImageColorTint(_ color : UIColor) {
+    func changeImageColorTint(_ color : UIColor) {
         self.image = self.image!.withRenderingMode(.alwaysTemplate)
         self.tintColor = color
     }
     
-    public func imageFromURL(fromURL url : String, placeHolder : UIImage?) {
-        self.kf.setImage(with: URL(string: url), placeholder: placeHolder , options: [.cacheOriginalImage], progressBlock: { (recivedSize,size) in
-        }, completionHandler: nil)
+    func imageFromURL(fromURL url : String, placeHolder : UIImage?) {
+        self.kf.setImage(with: URL(string: url), placeholder: placeHolder, options: [.cacheOriginalImage]) { (result: Result<RetrieveImageResult, KingfisherError>) in
+            switch result {
+            case .success(_):
+                break
+            case .failure(_):
+                break
+            }
+        }
     }
     
-    public func imageFromURL(fromURL url : String, placeHolder : UIImage?, handler: @escaping  ((_ error : Error?) -> ())) {
-        self.kf.setImage(with: URL(string: url), placeholder: placeHolder , options: [.cacheOriginalImage], progressBlock: { (recivedSize,size) in
-        }, completionHandler: {
-            (image, error, cashType, url) in
-            handler(error)
-        })
+    func imageFromURL(fromURL url : String, placeHolder : UIImage?, completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) {
+        self.kf.setImage(with: URL(string: url), placeholder: placeHolder, options: [.cacheOriginalImage]) { (resultHandler: Result<RetrieveImageResult, KingfisherError>) in
+            guard completionHandler != nil else { return }
+            
+            switch resultHandler {
+            case .success(let image):
+                completionHandler!(.success(image))
+            case .failure(let error):
+                completionHandler!(.failure(error))
+            }
+        }
     }
     
-    public func blur(withStyle style: UIBlurEffect.Style = .light) {
+    func blur(withStyle style: UIBlurEffect.Style = .light) {
         let blurEffect = UIBlurEffect(style: style)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = bounds
@@ -68,7 +80,7 @@ public extension UIImageView {
         clipsToBounds = true
     }
     
-    public func blurred(withStyle style: UIBlurEffect.Style = .light) -> UIImageView {
+    func blurred(withStyle style: UIBlurEffect.Style = .light) -> UIImageView {
         let imgView = self
         imgView.blur(withStyle: style)
         return imgView

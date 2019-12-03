@@ -9,7 +9,7 @@ import Foundation
 
 public extension CGFloat {
     
-    public var degreesToRadians: CGFloat {
+    var degreesToRadians: CGFloat {
         return .pi * self / 180.0
     }
 }

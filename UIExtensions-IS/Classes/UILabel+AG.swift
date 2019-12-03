@@ -9,34 +9,34 @@ import Foundation
 
 public extension UILabel {
     
-    public convenience init(font: UIFont, color: UIColor, alignment: NSTextAlignment) {
+    convenience init(font: UIFont, color: UIColor, alignment: NSTextAlignment) {
         self.init()
         self.font = font
         self.textColor = color
         self.textAlignment = alignment
     }
     
-    public func estimatedSize(_ width: CGFloat = CGFloat.greatestFiniteMagnitude, height: CGFloat = CGFloat.greatestFiniteMagnitude) -> CGSize {
+    func estimatedSize(_ width: CGFloat = CGFloat.greatestFiniteMagnitude, height: CGFloat = CGFloat.greatestFiniteMagnitude) -> CGSize {
         return sizeThatFits(CGSize(width: width, height: height))
     }
     
-    public func estimatedHeight() -> CGFloat {
+    func estimatedHeight() -> CGFloat {
         return sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)).height
     }
     
-    public func estimatedWidth() -> CGFloat {
+    func estimatedWidth() -> CGFloat {
         return sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: height)).width
     }
     
-    public func fitHeight() {
+    func fitHeight() {
         self.height = estimatedHeight()
     }
     
-    public func fitWidth() {
+     func fitWidth() {
         self.width = estimatedWidth()
     }
     
-    public func fitSize() {
+     func fitSize() {
         self.fitWidth()
         self.fitHeight()
         sizeToFit()

@@ -9,14 +9,14 @@ import UIKit
 
 public extension UINavigationBar {
     
-    public func setTitleFont(_ font: UIFont, color: UIColor = .black) {
+    func setTitleFont(_ font: UIFont, color: UIColor = .black) {
         var attrs = [NSAttributedString.Key: Any]()
         attrs[.font] = font
         attrs[.foregroundColor] = color
         titleTextAttributes = attrs
     }
     
-    public func makeTransparent(withTint tint: UIColor = .white) {
+    func makeTransparent(withTint tint: UIColor = .white) {
         isTranslucent = true
         backgroundColor = .clear
         barTintColor = .clear
@@ -26,7 +26,7 @@ public extension UINavigationBar {
         shadowImage = UIImage()
     }
     
-    public func setBackgroundColors(background: UIColor, text: UIColor) {
+    func setBackgroundColors(background: UIColor, text: UIColor) {
         isTranslucent = false
         backgroundColor = background
         barTintColor = background

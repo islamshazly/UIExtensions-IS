@@ -123,6 +123,8 @@ extension UIView {
         let bundle = Bundle(for: self.classForCoder)
         let view = UINib.init(nibName: String(describing: type(of: self)), bundle: bundle).instantiate(withOwner: self, options: nil)[0] as! UIView
         view.frame = self.bounds
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.translatesAutoresizingMaskIntoConstraints = true
         self.addSubview(view)
     }
     
@@ -272,11 +274,11 @@ private let UIViewAnimationScaleOriginal: CGFloat = 1.0
 
 public extension UIView {
     
-    public func spring(animations: @escaping (() -> Void), completion: ((Bool) -> Void)? = nil) {
+    func spring(animations: @escaping (() -> Void), completion: ((Bool) -> Void)? = nil) {
         spring(duration: UIViewAnimationDuration, animations: animations, completion: completion)
     }
     
-    public func spring(duration: TimeInterval, animations: @escaping (() -> Void), completion: ((Bool) -> Void)? = nil) {
+    func spring(duration: TimeInterval, animations: @escaping (() -> Void), completion: ((Bool) -> Void)? = nil) {
         UIView.animate(
             withDuration: UIViewAnimationDuration,
             delay: 0,
@@ -288,7 +290,7 @@ public extension UIView {
         )
     }
     
-    public func fadeIn(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
+    func fadeIn(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
         if isHidden {
             isHidden = false
         }
@@ -297,7 +299,7 @@ public extension UIView {
         }, completion: completion)
     }
     
-    public func fadeOut(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
+    func fadeOut(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
         if isHidden {
             isHidden = false
         }
@@ -306,21 +308,21 @@ public extension UIView {
         }, completion: completion)
     }
     
-    public func pop() {
+    func pop() {
         setScale(x: UIViewAnimationScalePop, y: UIViewAnimationScalePop)
         spring(duration: UIViewAnimationDurationPop, animations: { [unowned self] () -> Void in
             self.setScale(x: UIViewAnimationScaleOriginal, y: UIViewAnimationScaleOriginal)
         })
     }
     
-    public func popBig() {
+    func popBig() {
         setScale(x: UIViewAnimationScalePopBig, y: UIViewAnimationScalePopBig)
         spring(duration: UIViewAnimationDurationPopBig, animations: { [unowned self] () -> Void in
             self.setScale(x: UIViewAnimationScaleOriginal, y: UIViewAnimationScaleOriginal)
         })
     }
     
-    public func reversePop() {
+    func reversePop() {
         setScale(x: UIViewAnimationScaleReversePop, y: UIViewAnimationScaleReversePop)
         UIView.animate(withDuration: UIViewAnimationDurationReversePop, delay: 0, options: .allowUserInteraction, animations: {[weak self] in
             self?.setScale(x: UIViewAnimationScaleOriginal, y: UIViewAnimationScaleOriginal)
@@ -333,19 +335,19 @@ public extension UIView {
 
 public extension UIView {
     
-    public func addTapGesture(tapNumber: Int = 1, action: ((UITapGestureRecognizer) -> Void)?) {
+    func addTapGesture(tapNumber: Int = 1, action: ((UITapGestureRecognizer) -> Void)?) {
         let tap = TapGesture(tapCount: tapNumber, fingerCount: 1, action: action)
         addGestureRecognizer(tap)
         isUserInteractionEnabled = true
     }
     
-    public func addSwipeGesture(direction: UISwipeGestureRecognizer.Direction, fingerCount: Int = 1, action: ((UISwipeGestureRecognizer) -> Void)?) {
+    func addSwipeGesture(direction: UISwipeGestureRecognizer.Direction, fingerCount: Int = 1, action: ((UISwipeGestureRecognizer) -> Void)?) {
         let tap = SwipeGesture(direction: direction,fingerCount: fingerCount, action: action)
         addGestureRecognizer(tap)
         isUserInteractionEnabled = true
     }
     
-    public func addLongPressGesture(_ action: ((UILongPressGestureRecognizer) -> Void)?) {
+    func addLongPressGesture(_ action: ((UILongPressGestureRecognizer) -> Void)?) {
         let longPressGesture = LongPressGesture(action: action)
         addGestureRecognizer(longPressGesture)
         isUserInteractionEnabled = true

@@ -16,7 +16,7 @@ public extension UIButton {
         return [.normal, .selected, .highlighted, .disabled]
     }
     
-    public func loadingIndicator(_ show: Bool) {
+    func loadingIndicator(_ show: Bool) {
         let tag = 808404
         if show {
             self.imageView?.isHidden = true
@@ -41,7 +41,7 @@ public extension UIButton {
         }
     }
     
-    public func image(to color: UIColor, for: UIControl.State) {
+    func image(to color: UIColor, for: UIControl.State) {
         if let imageForState = self.image(for: state) {
             self.image(for: .normal)?.withRenderingMode(.alwaysTemplate)
             let colorizedImage = imageForState.image(withTintColor: color)
@@ -50,7 +50,7 @@ public extension UIButton {
         }
     }
     
-    public func centerTextAndImage(spacing: CGFloat) {
+    func centerTextAndImage(spacing: CGFloat) {
         let insetAmount = spacing / 2
         imageEdgeInsets = UIEdgeInsets(top: 0, left: -insetAmount, bottom: 0, right: insetAmount)
         titleEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: -insetAmount)

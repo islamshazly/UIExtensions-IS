@@ -22,7 +22,7 @@ public extension UITextField {
         }
     }
     
-    public var isEmpty: Bool {
+    var isEmpty: Bool {
         return text?.isEmpty == true
     }
 }
@@ -36,19 +36,19 @@ public extension UITextField {
         case right
     }
     
-    public func clear() {
+    func clear() {
         text = ""
         attributedText = NSAttributedString(string: "")
     }
     
-    public func setPlaceHolderTextColor(_ color: UIColor) {
+    func setPlaceHolderTextColor(_ color: UIColor) {
         guard let holder = placeholder, !holder.isEmpty else {
             return
         }
         self.attributedPlaceholder = NSAttributedString(string: holder, attributes: [.foregroundColor: color])
     }
     
-    public func addPadding(By value: CGFloat, for direction: Direction) {
+    func addPadding(By value: CGFloat, for direction: Direction) {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: value, height: frame.height))
         switch direction {
         case .left:
@@ -60,7 +60,7 @@ public extension UITextField {
         }
     }
     
-    public func addPaddingIcon(_ image: UIImage, padding: CGFloat, for direction: Direction) {
+    func addPaddingIcon(_ image: UIImage, padding: CGFloat, for direction: Direction) {
         let imageView = UIImageView(image: image)
         imageView.contentMode = .center
         let viewSize = CGSize(width: image.size.width + padding, height: image.size.height)
